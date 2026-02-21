@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>"חקרנית וללא אג'נדה" — כשהרופאים מעידים שאידיאולוגיה חדרה לרפואה</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+  background: #f5f5f8;
+  color: #1a1a2e;
+  direction: rtl;
+  line-height: 1.8;
+  font-size: 17px;
+}
+
+/* ── NAV ── */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #1a1a2e;
+  color: #fff;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+nav .brand {
+  font-weight: 700;
+  font-size: 1.05em;
+  color: #2ecc71;
+  flex-shrink: 0;
+  padding: 12px 0;
+}
+nav a {
+  color: #ccc;
+  text-decoration: none;
+  font-size: 0.88em;
+  padding: 12px 4px;
+  border-bottom: 2px solid transparent;
+  transition: 0.2s;
+  flex-shrink: 0;
+}
+nav a:hover, nav a.active { color: #2ecc71; border-bottom-color: #2ecc71; }
+
+/* ── HERO ── */
+.hero {
+  background: linear-gradient(135deg, #1a1a2e 0%, #1a4a2e 100%);
+  color: #fff;
+  padding: 60px 20px 50px;
+  text-align: center;
+}
+.hero h1 {
+  font-size: 2em;
+  font-weight: 700;
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+.hero .subtitle {
+  font-size: 1.1em;
+  color: #a0d4b0;
+  margin-bottom: 6px;
+}
+.hero .author {
+  font-size: 0.95em;
+  color: #2ecc71;
+  margin-top: 8px;
+}
+
+/* ── CONTENT ── */
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 30px 20px 80px;
+}
+
+/* TOC */
+.toc {
+  background: #fff;
+  border-radius: 8px;
+  padding: 24px 28px;
+  margin-bottom: 36px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+.toc h2 {
+  font-size: 1.2em;
+  color: #1a4a2e;
+  margin-bottom: 14px;
+  border-bottom: 2px solid #2ecc71;
+  padding-bottom: 6px;
+}
+.toc ol {
+  padding-right: 22px;
+  font-size: 0.95em;
+}
+.toc li { margin-bottom: 5px; }
+.toc a { color: #1a4a2e; text-decoration: none; }
+.toc a:hover { color: #2ecc71; text-decoration: underline; }
+
+/* SECTIONS */
+.section {
+  background: #fff;
+  border-radius: 8px;
+  padding: 32px 28px;
+  margin-bottom: 28px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+.section h2 {
+  font-size: 1.5em;
+  color: #1a1a2e;
+  margin-bottom: 18px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #2ecc71;
+}
+.section h3 {
+  font-size: 1.15em;
+  color: #1a4a2e;
+  margin: 22px 0 10px;
+}
+.section h4 {
+  font-size: 1.02em;
+  color: #444;
+  margin: 16px 0 8px;
+}
+.section p {
+  margin-bottom: 14px;
+  text-align: justify;
+}
+.section ul, .section ol {
+  padding-right: 24px;
+  margin-bottom: 14px;
+}
+.section li { margin-bottom: 6px; }
+
+/* DOCUMENT QUOTE - the IMA letter */
+.doc-quote {
+  background: #f8faf8;
+  border-right: 4px solid #bdc3c7;
+  padding: 14px 20px;
+  margin: 14px 0;
+  border-radius: 0 6px 6px 0;
+  font-size: 0.96em;
+  color: #333;
+  line-height: 1.7;
+}
+.doc-quote.critical {
+  background: #fef9e7;
+  border-right-color: #e74c3c;
+}
+.doc-quote .source {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.88em;
+  color: #666;
+  font-style: normal;
+}
+
+/* BLOCKQUOTES */
+blockquote {
+  background: #f0f4fa;
+  border-right: 4px solid #2ecc71;
+  padding: 14px 20px;
+  margin: 14px 0;
+  border-radius: 0 6px 6px 0;
+  font-size: 0.96em;
+  color: #333;
+  line-height: 1.7;
+}
+blockquote.english {
+  direction: ltr;
+  text-align: left;
+  border-right: none;
+  border-left: 4px solid #2ecc71;
+  border-radius: 6px 0 0 6px;
+  font-style: italic;
+}
+blockquote .source {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.88em;
+  color: #666;
+  font-style: normal;
+}
+
+/* ANNOTATION BOX */
+.annotation {
+  background: #fdf2f2;
+  border-right: 3px solid #e74c3c;
+  padding: 10px 16px;
+  margin: 8px 0 14px;
+  border-radius: 0 5px 5px 0;
+  font-size: 0.94em;
+  color: #8b1a1a;
+}
+
+/* HIGHLIGHT BOX */
+.highlight-box {
+  background: linear-gradient(135deg, #fdf2f2, #fff5f5);
+  border: 1px solid #e74c3c;
+  border-radius: 8px;
+  padding: 18px 22px;
+  margin: 18px 0;
+  font-weight: 600;
+  text-align: center;
+  font-size: 1.05em;
+  color: #8b1a1a;
+}
+
+/* KEY QUESTION BOX */
+.key-question {
+  background: linear-gradient(135deg, #e8f8f5, #f0faf5);
+  border: 2px solid #2ecc71;
+  border-radius: 8px;
+  padding: 22px 26px;
+  margin: 22px 0;
+  font-weight: 700;
+  text-align: center;
+  font-size: 1.15em;
+  color: #1a4a2e;
+}
+
+/* FACT BOX */
+.fact-box {
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 18px 22px;
+  margin: 14px 0;
+}
+.fact-box .number {
+  font-size: 2em;
+  font-weight: 700;
+  color: #e74c3c;
+  display: block;
+  margin-bottom: 4px;
+}
+
+/* COMPARISON TABLE */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 14px 0;
+  font-size: 0.93em;
+}
+th {
+  background: #1a4a2e;
+  color: #fff;
+  padding: 10px 14px;
+  text-align: right;
+  position: sticky;
+  top: 44px;
+  z-index: 5;
+}
+td {
+  padding: 8px 14px;
+  border-bottom: 1px solid #e8e8e8;
+  text-align: right;
+  vertical-align: top;
+}
+tr:hover td { background: #f8faf8; }
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 30px 20px;
+  color: #888;
+  font-size: 0.85em;
+  border-top: 1px solid #ddd;
+  margin-top: 40px;
+}
+footer a { color: #1a4a2e; }
+
+/* MOBILE */
+@media (max-width: 640px) {
+  .hero h1 { font-size: 1.5em; }
+  .section { padding: 20px 16px; }
+  body { font-size: 16px; }
+  nav { gap: 10px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="brand">חקרנית וללא אג'נדה</span>
+  <a href="#context">הקשר</a>
+  <a href="#letter">המכתב</a>
+  <a href="#facts">העובדות</a>
+  <a href="#exclusion">ההדרה</a>
+  <a href="#pattern">הדפוס</a>
+  <a href="#world">העולם</a>
+  <a href="#meaning">המשמעות</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>"חקרנית וללא אג'נדה"</h1>
+  <div class="subtitle">כשהגוף המקצועי מעיד שאידיאולוגיה חדרה לרפואת ילדים בישראל</div>
+  <div class="subtitle" style="font-size:0.95em; margin-top:4px;">ניתוח מכתב האיגוד לפסיכיאטריה של הילד והמתבגר למשרד הבריאות, 2023</div>
+  <div class="author">פרויקט אלכסון — צבי שלם</div>
+</div>
+
+<div class="container">
+
+<!-- TOC -->
+<div class="toc">
+  <h2>תוכן עניינים</h2>
+  <ol>
+    <li><a href="#context">הקשר: מה קורה כאן</a></li>
+    <li><a href="#letter">המכתב: מה האיגוד כתב</a></li>
+    <li><a href="#facts">העובדות: הנתונים שהאיגוד מציג</a></li>
+    <li><a href="#exclusion">ההדרה: מי הודר מהדיון</a></li>
+    <li><a href="#pattern">הדפוס: מה חוזר על עצמו</a></li>
+    <li><a href="#world">ההקשר העולמי: מדינות שעצרו</a></li>
+    <li><a href="#meaning">המשמעות: הרס אתיקה רפואית</a></li>
+  </ol>
+</div>
+
+<!-- CONTEXT -->
+<div class="section" id="context">
+  <h2>הקשר: מה קורה כאן</h2>
+
+  <p>בשנת 2023, משרד הבריאות הישראלי פרסם טיוטת חוזר בנושא "התאמה מגדרית" — שינוי פרט המין במרשם האוכלוסין, הפעלת מרפאות להתאמה מגדרית, וניתוחים להתאמה מגדרית.</p>
+
+  <p>האיגוד לפסיכיאטריה של הילד והמתבגר — הגוף המקצועי שאמור לייצג את האינטרסים הרפואיים של ילדים ובני נוער בישראל — כתב את תגובתו.</p>
+
+  <p>המכתב נראה במבט ראשון כמכתב מקצועי עניני. אבל בקריאה מדוקדקת, הוא מגלה דבר חמור: <strong>הגוף הרפואי המקצועי מעיד, במסמך רשמי, שאידיאולוגיה חדרה לאתיקה הרפואית.</strong></p>
+
+  <div class="key-question">שלוש מילים מגלות הכל: <strong>"חקרנית וללא אג'נדה."</strong><br>רופאים לא כותבים "ללא אג'נדה" בהנחיות קליניות — אלא אם הם עדים לאג'נדה.</div>
+</div>
+
+<!-- LETTER -->
+<div class="section" id="letter">
+  <h2>המכתב: מה האיגוד כתב</h2>
+
+  <p>להלן קטעים מרכזיים מתגובת האיגוד לפסיכיאטריה של הילד והמתבגר לטיוטת חוזר משרד הבריאות. הקטעים הקריטיים מסומנים.</p>
+
+  <h3>הפתיחה — ברכה מקצועית</h3>
+  <div class="doc-quote">
+    אנו מברכים על החשיבה והרצון לקדם בריאות באוכלוסייה הטרנסית על גווניה השונים, להקל על מצוקות הנוגעות להיבטים בירוקרטיים שמקדמים את הבריאות הנפשית של אוכלוסייה זו. בנוסף אנו מברכים על ההכרה שגיוון מגדרי אינו מתחיל באוכלוסייה הבגירה ומקדמים חשיבה בנושא בילדים ובני נוער.
+  </div>
+
+  <h3>הסייג הראשון — הערות קודמות נדחו</h3>
+  <div class="doc-quote critical">
+    <strong>אנו מצרים שלא התקבלו הערותינו הקודמות באותו נושא.</strong> עם זאת, בהתאם להערותנו הקודמות ובהתאם למסמך Standards of Care-8 של ה-WPATH —
+    <span class="source">— האיגוד לפסיכיאטריה של הילד והמתבגר</span>
+  </div>
+  <div class="annotation">הגוף המקצועי מעיד: הערותיו הקודמות לא התקבלו. המשמעות: משרד הבריאות קידם מדיניות תוך התעלמות מעמדת האיגוד המקצועי.</div>
+
+  <h3>עלייה דרמטית — שינוי באוכלוסייה</h3>
+  <div class="doc-quote critical">
+    אוכלוסיית המתבגרים מגוונת מגדר עוברת שינוי עצום בהיבט מספרי ומהותי בשנים האחרונות. <strong>כמות הפונים למרפאות נוער בנושא מגדר עלתה פי 20 בתקופה של כ-10 שנים</strong>, כך שנראה שגוף הידע שקיים מבוסס ברובו על אוכלוסייה מסוימת, טרם שינוי זה, <strong>בעוד שאין ידע מספק על אופי האוכלוסייה הפונה בשנים האחרונות</strong>, מאפייניהם הנפשיים וצרכיהם בהיבטים של גיוון מגדרי.
+    <span class="source">— האיגוד לפסיכיאטריה של הילד והמתבגר</span>
+  </div>
+  <div class="annotation">האיגוד מעיד: המחקר מבוסס על אוכלוסייה אחת — אבל המדיניות מיושמת על אוכלוסייה אחרת לגמרי. זה כמו לתת תרופה שנבדקה על מבוגרים לתינוקות — ולהתעלם מההבדל.</div>
+
+  <h3>אוכלוסייה שונה מהותית</h3>
+  <div class="doc-quote critical">
+    השינוי העיקרי הוא שמרבית בני הנוער אשר פונים כיום למרפאות נוער בנושא מגדר <strong>החלו לבטא לראשונה, ואף לחוש שאינם תואמים את המין בלידה, רק בגיל ההתבגרות</strong>, בניגוד לאוכלוסייה אשר אליה מכוונים מרבית המחקרים שמתארים אי-תאימות מגדרית מגיל הילדות. בנוסף כבר יש עלייה משמעותית בשיעור ה-birth assigned females, שיעור האוכלוסייה המגדרת עצמה עם זהות א-בינארית ושיעור האוכלוסייה <strong>עם הפרעות נוירו-התפתחותיות, ביחוד Autism Spectrum Disorder</strong>.
+    <span class="source">— האיגוד לפסיכיאטריה של הילד והמתבגר</span>
+  </div>
+  <div class="annotation">שלוש עובדות שהאיגוד מציין ושטיוטת משרד הבריאות מתעלמת מהן: (1) הופעה בגיל ההתבגרות ולא מילדות — אוכלוסייה שונה, (2) עלייה בנולדות-נקבה — שינוי דמוגרפי לא מוסבר, (3) שיעור גבוה של אוטיזם — שמטשטש את היכולת לאבחנה מגדרית.</div>
+
+  <h3>הבשלות ההתפתחותית — שאלת ההסכמה מדעת</h3>
+  <div class="doc-quote critical">
+    נדגיש עוד את הצורך במעקב צמוד על ידי צוות קבוע לאורך תקופה ממושכת בתהליך החקירה של הזהות המגדרית. כאשר מדובר בבני נוער, המרכיב ההתפתחותי הוא מרכיב עיקרי, בהיבט של הצורך בחקירת היבטים רבים של זהות, <strong>שינויים תדירים, צורך בתגמול מהיר וקושי בדחיית סיפוקים</strong> ושאלה לגבי <strong>היכולת לתת הסכמה מדעת</strong> במצב שבו התפתחות אינה תהליך לינארי ולעיתים התפתחות בשלה בהיבט אחד לא משליכה בהכרח על בשלות בהיבט אחר.
+    <span class="source">— האיגוד לפסיכיאטריה של הילד והמתבגר</span>
+  </div>
+  <div class="annotation">האיגוד מעלה שאלה יסודית: האם מתבגר — שמטבעו עובר שינויים תדירים, מתקשה בדחיית סיפוקים, ושבשלותו אינה אחידה — יכול לתת הסכמה מדעת לטיפולים בלתי הפיכים? זו שאלה שטיוטת משרד הבריאות אינה מתמודדת עימה.</div>
+
+  <h3>הציטוט המכריע: "חקרנית וללא אג'נדה"</h3>
+  <div class="doc-quote critical" style="border-right-width: 6px;">
+    לאור ההיבטים שפורטו לעיל, ה-SOC-8 מדגיש את הצורך בתהליך תומך, מכיל ומחנך את הסביבה לתמיכה בבני הנוער מגווני המגדר, ובהיבט הטיפולי הרפואי המסמך מדגיש את הצורך בגישה <strong>מדורגת, מפוקחת, וחקרנית ללא אג'נדה</strong> ונוקט במשנה זהירות בהחלטות מסוג זה.
+    <span class="source">— האיגוד לפסיכיאטריה של הילד והמתבגר</span>
+  </div>
+  <div class="annotation"><strong>זהו הציטוט המכריע.</strong> "חקרנית וללא אג'נדה" — רופאים לא כותבים "ללא אג'נדה" בהנחיות קליניות אלא אם הם עדים לאג'נדה. הגוף המקצועי מעיד, בשפה מרוסנת ומקצועית, על מה שכולם יודעים אבל אף אחד לא אומר: אידיאולוגיה חדרה לרפואת ילדים.</div>
+
+  <h3>SOC-8 לעומת SOC-7</h3>
+  <div class="doc-quote critical">
+    יש לציין את <strong>התמורה המשמעותית בין ה-SOC-7 לבין ה-SOC-8</strong> כאשר האחרון הוא זהיר באופן משמעותי בכל הנוגע לטיפולים מאששי מגדר בבני נוער, שמבטא את התמורות שציינו מעלה.
+    <span class="source">— האיגוד לפסיכיאטריה של הילד והמתבגר</span>
+  </div>
+  <div class="annotation">גם WPATH עצמה — הגוף שמקדם טיפולים מאששי מגדר — הפכה זהירה יותר. ה-SOC-8 (2022) הוא שמרני משמעותית מה-SOC-7 לגבי נוער. אבל מדיניות משרד הבריאות הישראלי אינה משקפת את הזהירות הזו.</div>
+
+  <h3>מדינות שעצרו לחלוטין</h3>
+  <div class="doc-quote critical">
+    כמו כן, וכפי שציינו בהערותינו הקודמות, <strong>קיימות הנחיות אחרות מלבד ה-SOC-8, אשר עצרו לעת עתה באופן מוחלט כל טיפול מאשש מגדר (הורמונלי, כולל GnRH Agonists וניתוחיים) באוכלוסיית הנוער</strong> — וזאת <strong>בשל העדר הוכחות ליעילות טיפולים</strong> —
+    <span class="source">— האיגוד לפסיכיאטריה של הילד והמתבגר</span>
+  </div>
+  <div class="annotation">מדינות ברחבי העולם — שוודיה, פינלנד, בריטניה, צרפת, נורבגיה, דנמרק — עצרו לחלוטין טיפולים הורמונליים וניתוחיים בנוער. הסיבה: <strong>אין הוכחות ליעילות.</strong> משרד הבריאות הישראלי ממשיך.</div>
+</div>
+
+<!-- FACTS -->
+<div class="section" id="facts">
+  <h2>העובדות: הנתונים שהאיגוד מציג</h2>
+
+  <div class="fact-box" style="text-align: center;">
+    <span class="number">x20</span>
+    עלייה בפניות למרפאות נוער מגדריות בתוך כעשור
+  </div>
+
+  <h3>מה השתנה באוכלוסייה</h3>
+  <table>
+    <thead><tr><th>מאפיין</th><th>האוכלוסייה שעליה מבוסס המחקר</th><th>האוכלוסייה הפונה כיום</th></tr></thead>
+    <tbody>
+      <tr><td><strong>גיל הופעה</strong></td><td>אי-תאימות מגדרית מגיל הילדות</td><td>הופעה ראשונה רק בגיל ההתבגרות</td></tr>
+      <tr><td><strong>מין בלידה</strong></td><td>רוב — נולדו זכר</td><td>עלייה משמעותית בנולדות-נקבה</td></tr>
+      <tr><td><strong>זהות מגדרית</strong></td><td>זהות בינארית (בנים שמזדהים כבנות)</td><td>שיעור גבוה של זהות א-בינארית</td></tr>
+      <tr><td><strong>מצבים נלווים</strong></td><td>שיעור נמוך של הפרעות נוירו-התפתחותיות</td><td>שיעור גבוה של אוטיזם (ASD)</td></tr>
+    </tbody>
+  </table>
+
+  <div class="highlight-box">המחקר מבוסס על אוכלוסייה A. המדיניות מיושמת על אוכלוסייה B. האיגוד המקצועי אומר שאין ידע מספק על אוכלוסייה B — ומשרד הבריאות ממשיך בכל זאת.</div>
+
+  <h3>הבעיה ההתפתחותית</h3>
+  <p>האיגוד מדגיש מאפיינים התפתחותיים של גיל ההתבגרות שהופכים את ההחלטה לבעייתית:</p>
+  <ul>
+    <li><strong>שינויים תדירים</strong> — זהות בגיל ההתבגרות היא לא זהות יציבה</li>
+    <li><strong>צורך בתגמול מהיר</strong> — קושי בדחיית סיפוקים</li>
+    <li><strong>הסכמה מדעת</strong> — האם מתבגר שבשלותו אינה אחידה יכול לתת הסכמה לטיפול בלתי הפיך?</li>
+    <li><strong>היבטים התפתחותיים אינם מסתיימים ב-18</strong> — אלא מספר שנים לאחר מכן</li>
+  </ul>
+</div>
+
+<!-- EXCLUSION -->
+<div class="section" id="exclusion">
+  <h2>ההדרה: מי הודר מהדיון</h2>
+
+  <h3>שלוש הדרות</h3>
+
+  <h4>1. הגוף המקצועי — הודר</h4>
+  <p>האיגוד לפסיכיאטריה של הילד והמתבגר — הגוף שאמור לייצג את האינטרסים הרפואיים של ילדים — מעיד שהערותיו הקודמות <strong>לא התקבלו</strong>. הוא לא הוזמן לדיונים על מדיניות שנוגעת ישירות לתחום מומחיותו.</p>
+
+  <h4>2. ההורים — הודרו</h4>
+  <p>ההורים — האחראים המשפטיים והמוסריים על ילדיהם — מודרים מתהליך קבלת ההחלטות. אותו דפוס של SEL בחינוך: ההורים הם "מכשול" ש"הבנה מצדם תוביל להפחתת התנגדויות."</p>
+
+  <h4>3. ההבחנות הקליניות — נעלמו</h4>
+  <p>הבחנות קליניות קריטיות — שלא היו בטיוטת משרד הבריאות ושהאיגוד נאלץ לציין בעצמו:</p>
+  <ul>
+    <li>ההבדל בין דיספוריה מגדרית מילדות לבין הופעה בגיל ההתבגרות</li>
+    <li>הקשר לאוטיזם והפרעות נוירו-התפתחותיות</li>
+    <li>ההבדל בין זהות בינארית לא-בינארית</li>
+    <li>השינוי הדמוגרפי (נולדות-נקבה)</li>
+    <li>שאלת ההסכמה מדעת בגיל ההתבגרות</li>
+  </ul>
+
+  <div class="highlight-box">מי מייצג את הילדים? לא הרופאים — הם הודרו. לא ההורים — הם הודרו. לא ההבחנות הקליניות — הן נעלמו. אז מי? מי מינה את עצמו נציג?</div>
+</div>
+
+<!-- PATTERN -->
+<div class="section" id="pattern">
+  <h2>הדפוס: מה חוזר על עצמו</h2>
+
+  <p>מכתב האיגוד אינו מקרה בודד. הוא אינסטנציאציה של דפוס שחוזר בכל תחום שהאידיאולוגיה נוגעת בו:</p>
+
+  <table>
+    <thead><tr><th>מאפיין</th><th>רפואת מגדר (2023)</th><th>SEL בחינוך (2020)</th></tr></thead>
+    <tbody>
+      <tr><td><strong>בסיס ראייתי</strong></td><td>האיגוד: "אין ידע מספק על האוכלוסייה הפונה"</td><td>יוזמה: "אין מידע אמפירי ישיר"</td></tr>
+      <tr><td><strong>המלצה בכל זאת</strong></td><td>משרד הבריאות ממשיך במדיניות</td><td>יוזמה ממליצה על רפורמה גורפת</td></tr>
+      <tr><td><strong>גוף מקצועי</strong></td><td>האיגוד מודר מדיונים</td><td>מומחים ביקורתיים מודרים</td></tr>
+      <tr><td><strong>הורים</strong></td><td>מודרים מתהליך</td><td>"הבנה מצדם תוביל להפחתת התנגדויות"</td></tr>
+      <tr><td><strong>שפה</strong></td><td>"התאמה מגדרית" (ניטרלית-חיובית)</td><td>"למידה רגשית-חברתית" (מי יכול להתנגד?)</td></tr>
+      <tr><td><strong>אג'נדה</strong></td><td>האיגוד דורש "ללא אג'נדה"</td><td>CASEL: "disrupting and resisting inequities"</td></tr>
+    </tbody>
+  </table>
+
+  <div class="annotation"><strong>אותו מנגנון, תחום אחר.</strong> ראיות חלשות → המלצה חזקה → מקצוענים מודרים → הורים מודרים → שפה חיובית מסתירה תוכן אידיאולוגי.</div>
+
+  <h3>מנגנון ה"פיתיון והחלפה"</h3>
+  <p><strong>שלב 1 — הפיתיון:</strong> "אנחנו רוצים לעזור לילדים שסובלים מדיספוריה מגדרית." מי יתנגד?</p>
+  <p><strong>שלב 2 — ההחלפה:</strong> הגדרת "דיספוריה" מורחבת, הסטנדרטים הרפואיים מורדים, ההבחנות הקליניות נעלמות, המקצוענים מודרים, וילדים מקבלים טיפולים בלתי הפיכים על בסיס ראיות לא מספקות.</p>
+</div>
+
+<!-- WORLD -->
+<div class="section" id="world">
+  <h2>ההקשר העולמי: מדינות שעצרו</h2>
+
+  <p>האיגוד הישראלי מציין שקיימות הנחיות שעצרו <strong>באופן מוחלט</strong> כל טיפול מאשש מגדר בנוער. אלו אינן מדינות שמרניות — אלו מדינות עם מערכות בריאות מתקדמות שביצעו סקירות עצמאיות:</p>
+
+  <table>
+    <thead><tr><th>מדינה</th><th>מה קרה</th></tr></thead>
+    <tbody>
+      <tr><td><strong>שוודיה</strong></td><td>בית החולים קרולינסקה עצר טיפולים הורמונליים בנוער (2021). ועדה לאומית המליצה על הגבלות חמורות.</td></tr>
+      <tr><td><strong>פינלנד</strong></td><td>שינתה הנחיות (2020): פסיכותרפיה כקו ראשון, לא הורמונים. הפסיכיאטרית הראשית קראה ליתר זהירות.</td></tr>
+      <tr><td><strong>בריטניה</strong></td><td>דו"ח קאס (2024): מרפאת Tavistock נסגרה. הנחיות חדשות מגבילות משמעותית טיפולים בנוער.</td></tr>
+      <tr><td><strong>צרפת</strong></td><td>האקדמיה הלאומית לרפואה קראה ל"זהירות רבה" (2022).</td></tr>
+      <tr><td><strong>נורבגיה</strong></td><td>ועדה ממשלתית המליצה על הגבלת טיפולים (2023).</td></tr>
+      <tr><td><strong>דנמרק</strong></td><td>ריכוז טיפולים במרכז אחד ארצי, הגבלות על טיפול הורמונלי בנוער.</td></tr>
+    </tbody>
+  </table>
+
+  <p>הכיוון ברור: מדינות שביצעו סקירות ראייתיות עצמאיות — במקום לסמוך על WPATH בלבד — הגיעו למסקנה שהראיות אינן תומכות בטיפולים בנוער.</p>
+
+  <div class="highlight-box">ישראל, במקום ללמוד מהעולם, ממשיכה בכיוון שמדינות מפותחות נסוגות ממנו — תוך התעלמות מהגוף המקצועי שלה עצמה.</div>
+</div>
+
+<!-- MEANING -->
+<div class="section" id="meaning">
+  <h2>המשמעות: הרס אתיקה רפואית</h2>
+
+  <h3>מה נהרס כאן</h3>
+  <p>מכתב האיגוד חושף הרס שיטתי של עקרונות יסוד באתיקה הרפואית:</p>
+
+  <ul>
+    <li><strong>Primum non nocere — "ראשית, אל תזיק"</strong> — טיפולים בלתי הפיכים ניתנים על בסיס ראיות שהאיגוד המקצועי עצמו קובע שאינן מספקות</li>
+    <li><strong>הסכמה מדעת</strong> — האיגוד מעלה ספק ביכולת מתבגרים לתת הסכמה מדעת לטיפולים בלתי הפיכים, והטיוטה לא מתמודדת עם זה</li>
+    <li><strong>רפואה מבוססת ראיות</strong> — המדיניות מיושמת על אוכלוסייה שהמחקר לא בדק; מדינות שביצעו סקירות עצמאיות הגיעו למסקנות הפוכות</li>
+    <li><strong>ייעוץ מקצועי</strong> — הגוף המקצועי מודר מדיונים והערותיו נדחות</li>
+    <li><strong>זכויות הורים</strong> — ההורים מודרים מתהליך קבלת החלטות בלתי הפיכות על ילדיהם</li>
+    <li><strong>אבחנה מבדלת</strong> — הבחנות קליניות קריטיות (אוטיזם, הופעה בגיל ההתבגרות, א-בינאריות) לא מקבלות משקל</li>
+  </ul>
+
+  <h3>השאלה</h3>
+  <p>כשהגוף המקצועי מוזהר, מודר מדיונים, הערותיו נדחות — ובינתיים ילדים מקבלים טיפולים בלתי הפיכים — זו לא חמלה. זה לא רפואה. זה אידיאולוגיה שעוטה חלוק לבן.</p>
+
+  <div class="key-question">"חקרנית וללא אג'נדה."<br><br>שלוש מילים. הגוף המקצועי עצמו מעיד.<br>והעדות הזו — נדחתה.</div>
+
+  <h3>ראו גם</h3>
+  <ul>
+    <li><a href="https://aosshalem-dev.github.io/victim-representation/">מי מינה אותך נציג?</a> — כיצד הפרוגרסיביזם מנכס סבל אמיתי למטרות שלו</li>
+  </ul>
+</div>
+
+<footer>
+  <p>מסמך זה מנתח את תגובת האיגוד לפסיכיאטריה של הילד והמתבגר לטיוטת חוזר משרד הבריאות בנושא התאמה מגדרית (2023)</p>
+  <p>כל הציטוטים מתוך המסמך המקורי של האיגוד. ניתוח במסגרת פרויקט "אלכסון" של צבי שלם.</p>
+</footer>
+
+</div><!-- /container -->
+
+<script>
+// Smooth scroll for nav links
+document.querySelectorAll('nav a, .toc a').forEach(a => {
+  a.addEventListener('click', e => {
+    const href = a.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      e.preventDefault();
+      const el = document.querySelector(href);
+      if (el) {
+        const offset = 50;
+        const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    }
+  });
+});
+
+// Highlight active nav link on scroll
+const sections = document.querySelectorAll('.section[id]');
+const navLinks = document.querySelectorAll('nav a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.pageYOffset >= s.offsetTop - 80) current = s.id;
+  });
+  navLinks.forEach(a => {
+    a.classList.remove('active');
+    if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+  });
+});
+</script>
+
+</body>
+</html>
